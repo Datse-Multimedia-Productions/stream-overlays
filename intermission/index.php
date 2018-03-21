@@ -11,18 +11,19 @@ include_once("defaults.php");
 $now=time();
 
 $intermissionStart=intermissionStartTime($startfile);
-
 $elapsedTime=$now-$intermissionStart;
 
 $intermissionDurration=intermissionDurration($durrfile);
-
 $intermissionTimeLeft=$intermissionDurration-$elapsedTime;
+
+$intermissionReason=intermissionReason($reasonfile);
 
 $startString=date("D Y F j H:i:s", $intermissionStart);
 $nowString=date("D Y F j H:i:s", $now);
 $durrString=time_elapsed_A($intermissionDurration);
 $elapsedString=time_elapsed_A($elapsedTime);
 $leftString=time_elapsed_A($intermissionTimeLeft);
+$reasonString=$intermissionReason;
 
 
 ?>
@@ -38,6 +39,7 @@ $leftString=time_elapsed_A($intermissionTimeLeft);
 	<p>Sadly, this intermission page isn't setup correctly, so you get limited information</p>
 	<h2>Intermission Details</h2>
 	<ul>
+		<li>Intermission Reason: <?php echo $reasonString; ?></li>
 		<li>Intermission Start: <?php echo $startString; ?></li>
 		<li>Current Time: <?php echo $nowString; ?></li>
 		<li>Intermission Durration: <?php echo $durrString; ?></li>
