@@ -57,7 +57,7 @@ function intermissionDurration($filename) {
 }
 
 function interrmissionReason($reasonname) {
-	if (file_exists($reasonname) && is_readable($reasonname) {
+	if (file_exists($reasonname) && is_readable($reasonname)) {
 		$file=fopen($reasonname, "r");
 		$reason=$fgets($file);
 		return $reason;
