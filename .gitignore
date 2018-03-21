@@ -1,1 +1,6 @@
-# Nothing yet
+# Build and Vendor Stuff
+vendor/
+build/
+composer.lock
+composer.phar
+
