@@ -5,7 +5,7 @@ include_once("defaults.php");
 include_once("timefunctions.php");
 
 $multiplier = array(
-	"seconds" => 0,
+	"seconds" => 1,
 	"minutes" => 60,
 	"hours" => 3600,
 	"days" => 3600*24,
