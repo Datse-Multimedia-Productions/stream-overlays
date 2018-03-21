@@ -40,6 +40,7 @@ $nowString=date("D Y F j H:i:s", $now);
 $durrString=time_elapsed_A($intermissionDurration);
 $elapsedString=time_elapsed_A($elapsedTime);
 $leftString=time_elapsed_A($intermissionTimeLeft);
+$reasonString=$intermissionReason;
 
 
 ?>
