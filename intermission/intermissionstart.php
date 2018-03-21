@@ -22,7 +22,7 @@ function intermissionStartTime($filename) {
 	}
 }
 
-function startIntermission($startname, $durrationname, $durration) {
+function startIntermission($startname, $durrationname, $reasonname, $durration, $reason) {
 	if (file_exists($startname) && is_writable($startname)) {
                 $file=fopen($startname, "w");
 		$startTime=time();
@@ -33,8 +33,13 @@ function startIntermission($startname, $durrationname, $durration) {
                 $file=fopen($durrationname, "w");
                 fwrite($file, $durration);
 		fclose($file);
-	} else {
 	}
+	if (file_exists($reasonname) && is_writable($reasonname)) {
+                $file=fopen($reasonname, "w");
+                fwrite($file, $reason);
+                fclose($file);
+	}
+	
 }       
 
 function intermissionDurration($filename) {
@@ -46,6 +51,16 @@ function intermissionDurration($filename) {
 		} else {
 			return FALSE;
 		}
+	} else {
+		return FALSE;
+	}
+}
+
+function interrmissionReason($reasonname) {
+	if (file_exists($reasonname) && is_readable($reasonname) {
+		$file=fopen($reasonname, "r");
+		$reason=$fgets($file);
+		return $reason;
 	} else {
 		return FALSE;
 	}

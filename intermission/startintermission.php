@@ -16,8 +16,9 @@ $multiplier = array(
 if (isset($_POST["value"]) && isset($_POST["units"])) {
 	$value=$_POST["value"];
 	$units=$_POST["units"];
+	$reason=$_POST["reason"];
 	$durration=$value*$multiplier[$units]+rand(0,$multiplier[$units]);
-	startIntermission($startfile, $durrfile, $durration);
+	startIntermission($startfile, $durrfile, $reasonfile, $durration, $reason);
 }
 
 $self=$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -29,6 +30,8 @@ $intermissionStart=intermissionStartTime($startfile);
 $elapsedTime=$now-$intermissionStart;
 
 $intermissionDurration=intermissionDurration($durrfile);
+
+$intermissionReason=intermissionReason($reasonfile);
 
 $intermissionTimeLeft=$intermissionDurration-$elapsedTime;
 
@@ -49,7 +52,9 @@ $leftString=time_elapsed_A($intermissionTimeLeft);
 	<h1>Set the new intermission</h1>
 	<p>This will set the new intermission</p>
 
-	<form action="<?php $selfi ?>" method="post">
+	<form action="<?php $self ?>" method="post">
+		<label for="reason">Reason:</label>
+		<input id="reason" name="reason" type="text">
 		<label for="value">Value:</label>
 		<input id="value" type="text" name="value">
 		<label for="units">Units:</label>
@@ -66,6 +71,7 @@ $leftString=time_elapsed_A($intermissionTimeLeft);
 
 	<p>This is the current intermission:</p>
 	<ul>
+		<li>Intermission Reason: <?php echo $reasonString ?></li>
                 <li>Intermission Start: <?php echo $startString; ?></li>
                 <li>Current Time: <?php echo $nowString; ?></li>
                 <li>Intermission Durration: <?php echo $durrString; ?></li>
