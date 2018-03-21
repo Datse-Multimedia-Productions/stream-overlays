@@ -1,0 +1,41 @@
+sudo: false 
+
+language: php
+
+matrix:
+    fast_finish: true
+
+    include:
+        # Current $required_php_version for WordPress: 5.2.4
+        # aliased to a recent 5.6.x version
+        - php: '5.6'
+        # aliased to a recent 7.0.x version
+        - php: '7.0'
+        # aliased to a recent 7.1.x version
+        - php: '7.1'
+        # aliased to a recent 7.2.x version
+        - php: '7.2'
+        # aliased to a recent hhvm version
+        - php: 'hhvm'
+
+    allow_failures:
+        - php: 'hhvm'
+
+install:
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar install --dev --no-interaction
+
+script:
+    - mkdir -p build/logs
+    - mkdir -p build/cov
+    - php vendor/bin/phpunit -c phpunit.xml.dist
+    # Search for PHP syntax errors.
+    - find -L . -maxdepth 1 -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
+    - find -L ./library  -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
+
+after_success:
+  - travis_retry php vendor/bin/php-coveralls
+  # or enable logging
+  - travis_retry php vendor/bin/php-coveralls -v
+
+
