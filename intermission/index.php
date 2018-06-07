@@ -1,6 +1,6 @@
 <?php 
 
-$refresh=rand(1,20); 
+$refresh=rand(1,2); 
 
 header("Refresh:$refresh");
 
